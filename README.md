@@ -280,3 +280,7 @@ This project uses the standard `gsap` package — `SplitText` and `ScrollSmoothe
 MIT — see [LICENSE](LICENSE).
 
 If you ship a portfolio based on this code, a link back is appreciated but not required.
+
+---
+
+Built by [@skylordblink](https://github.com/skylordblink).
