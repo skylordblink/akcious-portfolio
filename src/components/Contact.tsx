@@ -1,5 +1,14 @@
 import { MdCopyright } from "react-icons/md";
+import { Link } from "react-router-dom";
 import "./styles/Contact.css";
+
+const SERVICES_LIST = [
+  { slug: "trading-bots", label: "Trading & Telegram Bots" },
+  { slug: "casino-sportsbook", label: "Casino & Sportsbook Platforms" },
+  { slug: "defi-smart-contracts", label: "DeFi Protocols & Smart Contracts" },
+  { slug: "ai-agents", label: "AI Agents & Workflow Automation" },
+  { slug: "fullstack", label: "Full-Stack Web & Mobile" },
+];
 
 const Contact = () => {
   return (
@@ -18,11 +27,17 @@ const Contact = () => {
           </div>
           <div className="contact-box">
             <h4>Services</h4>
-            <p>Trading &amp; Telegram Bots</p>
-            <p>Casino &amp; Sportsbook Platforms</p>
-            <p>DeFi Protocols &amp; Smart Contracts</p>
-            <p>AI Agents &amp; Workflow Automation</p>
-            <p>Full-Stack Web &amp; Mobile</p>
+            {SERVICES_LIST.map((s) => (
+              <p key={s.slug}>
+                <Link
+                  to={`/services/${s.slug}`}
+                  className="contact-service-link"
+                  data-cursor="disable"
+                >
+                  {s.label}
+                </Link>
+              </p>
+            ))}
           </div>
           <div className="contact-box">
             <h2>

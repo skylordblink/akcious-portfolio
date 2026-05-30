@@ -30,6 +30,8 @@ function renderBar(percent: number): string {
   );
 }
 
+const SESSION_BOOT_KEY = "akcious_booted";
+
 const Loading = ({ percent }: { percent: number }) => {
   const { setIsLoading } = useLoading();
   const [loaded, setLoaded] = useState(false);
@@ -40,6 +42,13 @@ const Loading = ({ percent }: { percent: number }) => {
   useEffect(() => {
     if (typeof window !== "undefined" && window.matchMedia) {
       setIsTouchPrimary(window.matchMedia("(pointer: coarse)").matches);
+    }
+    try {
+      if (sessionStorage.getItem(SESSION_BOOT_KEY) === "1") {
+        setIsLoading(false);
+      }
+    } catch {
+      // sessionStorage may be unavailable (private mode, etc.) — ignore
     }
   }, []);
 
@@ -57,6 +66,11 @@ const Loading = ({ percent }: { percent: number }) => {
         setTimeout(() => {
           if (module.initialFX) {
             module.initialFX();
+          }
+          try {
+            sessionStorage.setItem(SESSION_BOOT_KEY, "1");
+          } catch {
+            // sessionStorage may be unavailable
           }
           setIsLoading(false);
         }, 900);
