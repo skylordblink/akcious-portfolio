@@ -87,20 +87,21 @@ const WhatIDo = () => {
             <div className="what-corner"></div>
 
             <div className="what-content-in">
-              <h3>AI & AUTOMATION</h3>
-              <h4>Workflow Intelligence for Organizations</h4>
+              <h3>BOTS & AUTOMATION</h3>
+              <h4>24/7 Operations That Run Themselves</h4>
               <p>
-                AI specialist helping organizations automate workflows—internal ops
-                and customer-facing—so teams ship faster with less manual work.
+                Telegram and Discord bots, trading bots, AI agents, pipeline and
+                workflow automation. Built to handle real volume — alerts, exchange
+                APIs, signal execution, lead scoring, and ops that never sleep.
               </p>
-              <h5>Skillset & tools</h5>
+              <h5>Skillset &amp; tools</h5>
               <div className="what-content-flex">
-                <div className="what-tags">LLMs &amp; agents</div>
-                <div className="what-tags">Workflow design</div>
-                <div className="what-tags">RAG &amp; retrieval</div>
-                <div className="what-tags">Evals &amp; guardrails</div>
-                <div className="what-tags">Integrations</div>
-                <div className="what-tags">Product strategy</div>
+                <div className="what-tags">Telegram &amp; Discord bots</div>
+                <div className="what-tags">Trading bots</div>
+                <div className="what-tags">AI agents</div>
+                <div className="what-tags">LLMs &amp; RAG</div>
+                <div className="what-tags">Workflow automation</div>
+                <div className="what-tags">Lead scoring</div>
               </div>
               <div className="what-arrow"></div>
             </div>
@@ -125,19 +126,21 @@ const WhatIDo = () => {
             <div className="what-corner"></div>
             <div className="what-content-in">
               <h3>BUILD &amp; SCALE</h3>
-              <h4>Shipping AI in Production</h4>
+              <h4>Revenue Platforms, Production-Grade</h4>
               <p>
-                I build the systems behind it: APIs, data, voice/real-time, and
-                full-stack products—production-ready, not slide decks.
+                Casino and sportsbook engines, DeFi protocols, fintech with
+                compliance, real-time platforms. Full-stack delivery — schema to
+                smart contracts to deployment to post-launch ops.
               </p>
-              <h5>Skillset & tools</h5>
+              <h5>Skillset &amp; tools</h5>
               <div className="what-content-flex">
+                <div className="what-tags">Next.js &amp; React</div>
                 <div className="what-tags">Node.js</div>
-                <div className="what-tags">Python</div>
-                <div className="what-tags">REST &amp; real-time APIs</div>
-                <div className="what-tags">PostgreSQL</div>
-                <div className="what-tags">MongoDB</div>
-                <div className="what-tags">React</div>
+                <div className="what-tags">TypeScript</div>
+                <div className="what-tags">Solidity</div>
+                <div className="what-tags">Socket.io</div>
+                <div className="what-tags">PostgreSQL &amp; MongoDB</div>
+                <div className="what-tags">Stripe</div>
                 <div className="what-tags">Cloud &amp; infra</div>
               </div>
               <div className="what-arrow"></div>
