@@ -2,7 +2,33 @@ import { useEffect, useState } from "react";
 import "./styles/Loading.css";
 import { useLoading } from "../context/LoadingProvider";
 
-import Marquee from "react-fast-marquee";
+type BootLine = {
+  at: number;
+  glyph: ">" | "✓";
+  text: string;
+};
+
+const BOOT_LINES: BootLine[] = [
+  { at: 0, glyph: ">", text: "akcious.dev: booting..." },
+  { at: 15, glyph: "✓", text: "loading 3D engine" },
+  { at: 35, glyph: "✓", text: "compiling bots & agents" },
+  { at: 55, glyph: "✓", text: "initializing trading hooks" },
+  { at: 75, glyph: "✓", text: "loading portfolio assets" },
+  { at: 95, glyph: ">", text: "ready." },
+];
+
+const BAR_WIDTH = 20;
+
+function renderBar(percent: number): string {
+  const clamped = Math.max(0, Math.min(100, percent));
+  const filled = Math.round((clamped / 100) * BAR_WIDTH);
+  return (
+    "[" +
+    "█".repeat(filled) +
+    "░".repeat(BAR_WIDTH - filled) +
+    "]"
+  );
+}
 
 const Loading = ({ percent }: { percent: number }) => {
   const { setIsLoading } = useLoading();
@@ -10,14 +36,12 @@ const Loading = ({ percent }: { percent: number }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [clicked, setClicked] = useState(false);
 
-  if (percent >= 100) {
-    setTimeout(() => {
-      setLoaded(true);
-      setTimeout(() => {
-        setIsLoaded(true);
-      }, 1000);
-    }, 600);
-  }
+  useEffect(() => {
+    if (percent >= 100 && !loaded) {
+      const t = setTimeout(() => setLoaded(true), 600);
+      return () => clearTimeout(t);
+    }
+  }, [percent, loaded]);
 
   useEffect(() => {
     import("./utils/initialFX").then((module) => {
@@ -33,60 +57,61 @@ const Loading = ({ percent }: { percent: number }) => {
     });
   }, [isLoaded]);
 
-  function handleMouseMove(e: React.MouseEvent<HTMLElement>) {
-    const { currentTarget: target } = e;
-    const rect = target.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    target.style.setProperty("--mouse-x", `${x}px`);
-    target.style.setProperty("--mouse-y", `${y}px`);
-  }
+  useEffect(() => {
+    if (!loaded) return;
+    const onKey = () => setIsLoaded(true);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [loaded]);
+
+  const visibleLines = BOOT_LINES.filter((l) => percent >= l.at);
+  const shownPercent = Math.min(100, Math.round(percent));
 
   return (
-    <>
-      <div className="loading-header">
-        <a href="/#" className="loader-title" data-cursor="disable">
-          AP
-        </a>
-        <div className={`loaderGame ${clicked && "loader-out"}`}>
-          <div className="loaderGame-container">
-            <div className="loaderGame-in">
-              {[...Array(27)].map((_, index) => (
-                <div className="loaderGame-line" key={index}></div>
-              ))}
+    <div
+      className={`loading-screen ${clicked ? "loading-clicked" : ""}`}
+      onClick={() => loaded && setIsLoaded(true)}
+      data-cursor="disable"
+    >
+      <div className="loading-card">
+        <div className="loading-titlebar">
+          <span className="loading-dot" />
+          <span className="loading-dot" />
+          <span className="loading-dot" />
+          <span className="loading-title-label">
+            akcious.dev — ~/portfolio
+          </span>
+        </div>
+        <div className="loading-output">
+          {visibleLines.map((line, i) => (
+            <div className="loading-line" key={i}>
+              <span
+                className={
+                  line.glyph === "✓"
+                    ? "loading-glyph loading-glyph-ok"
+                    : "loading-glyph"
+                }
+              >
+                {line.glyph}
+              </span>
+              <span className="loading-line-text">{line.text}</span>
             </div>
-            <div className="loaderGame-ball"></div>
+          ))}
+          <div className="loading-line loading-progress-line">
+            <span className="loading-glyph">{">"}</span>
+            <span className="loading-line-text">
+              {renderBar(percent)} {shownPercent}%
+            </span>
           </div>
+          {loaded && (
+            <div className="loading-prompt">
+              PRESS ANY KEY TO ENTER
+              <span className="loading-cursor">{"▌"}</span>
+            </div>
+          )}
         </div>
       </div>
-      <div className="loading-screen">
-        <div className="loading-marquee">
-          <Marquee>
-            <span> Full Stack Developer</span> <span>Software Engineer</span>
-            <span> Full Stack Developer</span> <span>Software Engineer</span>
-          </Marquee>
-        </div>
-        <div
-          className={`loading-wrap ${clicked && "loading-clicked"}`}
-          onMouseMove={(e) => handleMouseMove(e)}
-        >
-          <div className="loading-hover"></div>
-          <div className={`loading-button ${loaded && "loading-complete"}`}>
-            <div className="loading-container">
-              <div className="loading-content">
-                <div className="loading-content-in">
-                  Loading <span>{percent}%</span>
-                </div>
-              </div>
-              <div className="loading-box"></div>
-            </div>
-            <div className="loading-content2">
-              <span>Welcome</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
+    </div>
   );
 };
 
