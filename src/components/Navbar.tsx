@@ -23,6 +23,23 @@ const Navbar = () => {
     smoother.scrollTop(0);
     smoother.paused(true);
 
+    // If the boot loader already ran in this session, the click path won't
+    // fire initialFX again — so we fire it here to un-pause the smoother,
+    // enable body scroll, and run the landing intro animations.
+    let alreadyBooted = false;
+    try {
+      alreadyBooted = sessionStorage.getItem("akcious_booted") === "1";
+    } catch {
+      // sessionStorage may be unavailable — proceed as first visit
+    }
+    if (alreadyBooted) {
+      import("./utils/initialFX").then((module) => {
+        if (module.initialFX) {
+          module.initialFX();
+        }
+      });
+    }
+
     let links = document.querySelectorAll(".header ul a");
     links.forEach((elem) => {
       let element = elem as HTMLAnchorElement;
