@@ -35,6 +35,13 @@ const Loading = ({ percent }: { percent: number }) => {
   const [loaded, setLoaded] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [clicked, setClicked] = useState(false);
+  const [isTouchPrimary, setIsTouchPrimary] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.matchMedia) {
+      setIsTouchPrimary(window.matchMedia("(pointer: coarse)").matches);
+    }
+  }, []);
 
   useEffect(() => {
     if (percent >= 100 && !loaded) {
@@ -105,7 +112,7 @@ const Loading = ({ percent }: { percent: number }) => {
           </div>
           {loaded && (
             <div className="loading-prompt">
-              PRESS ANY KEY TO ENTER
+              {isTouchPrimary ? "TAP ANYWHERE TO ENTER" : "PRESS ANY KEY TO ENTER"}
               <span className="loading-cursor">{"▌"}</span>
             </div>
           )}
