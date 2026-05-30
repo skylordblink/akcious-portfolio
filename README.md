@@ -4,13 +4,13 @@ A 3D portfolio site for **Akcious Pison** — full-stack developer & bot enginee
 
 **Live:** https://akcious.vercel.app
 
-> Forked and heavily customized from [akashrmalhotra/3d-portfolio](https://github.com/akashrmalhotra/3d-portfolio) (MIT). Original boilerplate by [Akash Malhotra](https://github.com/akashrmalhotra) — credit due. This fork rewrites the loader, adds a router + 5 service pages with new 3D scenes, fixes a few cleanup bugs, and rebrands the content end-to-end.
+Open source under MIT — fork it, customize it, ship your own portfolio.
 
 ---
 
 ## Table of Contents
 
-- [What's in this fork](#whats-in-this-fork)
+- [Features](#features)
 - [Tech stack](#tech-stack)
 - [Project structure](#project-structure)
 - [Getting started](#getting-started)
@@ -20,20 +20,19 @@ A 3D portfolio site for **Akcious Pison** — full-stack developer & bot enginee
 - [Deployment](#deployment)
 - [Available scripts](#available-scripts)
 - [Troubleshooting](#troubleshooting)
-- [License & credits](#license--credits)
+- [License](#license)
 
 ---
 
-## What's in this fork
+## Features
 
-Beyond the original upstream portfolio:
-
-- **Boot-terminal loader** — Replaces the light-teal marquee loader with a dark CLI-style terminal card. Status lines print as percent climbs, ending in `PRESS ANY KEY TO ENTER` (desktop) or `TAP ANYWHERE TO ENTER` (touch). Matches the dev/bot-engineer positioning.
+- **Boot-terminal loader** — Dark CLI-style terminal card. Status lines print as percent climbs, ending in `PRESS ANY KEY TO ENTER` (desktop) or `TAP ANYWHERE TO ENTER` (touch). First visit per session only — sub­sequent home visits skip it via `sessionStorage`.
 - **Five deep-linkable service pages** — `/services/trading-bots`, `/services/casino-sportsbook`, `/services/defi-smart-contracts`, `/services/ai-agents`, `/services/fullstack`. Each has a hero, problem statement, deliverables list, tech-stack chips, reused Contact section, and a **dedicated `@react-three/fiber` 3D centerpiece** (candlesticks, dice + chip, network nodes, distorted icosahedron, layered platform stack).
-- **`react-router-dom` v6** for client-side routing with a `vercel.json` SPA fallback so direct loads of `/services/...` don't 404.
-- **Session-aware loader** — Boot terminal only runs on the first visit per session (`sessionStorage` flag). Navigating between home and service pages is instant.
-- **Resize-listener leak fix** in `Character/Scene.tsx` — the original inline-arrow `removeEventListener` was a no-op. With routing added, the home scene now disposes its WebGL context cleanly.
-- **Custom favicon + meta** — SVG `AP` monogram, `theme-color`, and a meta description.
+- **3D character scene** on the home page (raw Three.js) with GSAP-driven scroll choreography, head tracking, and an animated intro.
+- **TechStack physics scene** — floating tech-icon stack with Rapier physics.
+- **Custom cursor**, smooth scroll via GSAP ScrollSmoother, character-by-character text reveals.
+- **Client-side routing** with `react-router-dom` + `vercel.json` SPA fallback so direct loads of `/services/...` URLs don't 404.
+- **Responsive** — hero stacks on mobile, 3D scenes scale down, typography uses `clamp()`.
 
 ---
 
@@ -45,7 +44,7 @@ Beyond the original upstream portfolio:
 - Vite 5
 
 **3D & animation**
-- `three` — raw three.js for the home character scene
+- `three` — raw Three.js for the home character scene
 - `@react-three/fiber` + `@react-three/drei` — declarative R3F for service-page 3D scenes
 - `@react-three/postprocessing`, `@react-three/cannon`, `@react-three/rapier` — physics & post-effects (TechStack section)
 - `gsap` + `@gsap/react` — scroll smoother, split-text reveals, character timeline
@@ -53,7 +52,6 @@ Beyond the original upstream portfolio:
 **Supporting**
 - `react-router-dom` — routing
 - `react-icons` — icon set
-- `react-fast-marquee` — text marquee (still installed, no longer used after the loader rewrite)
 - `@vercel/analytics` — Vercel analytics hook
 
 ---
@@ -64,9 +62,9 @@ Beyond the original upstream portfolio:
 .
 ├── public/
 │   ├── favicon.svg              # AP monogram favicon
-│   ├── models/                  # 3D character GLB (encrypted) + HDR env
+│   ├── models/                  # 3D character GLB + HDR env
 │   ├── draco/                   # DRACO decoder for GLB compression
-│   └── images/                  # project screenshots
+│   └── images/                  # project screenshots + tech logos
 ├── src/
 │   ├── App.tsx                  # Router + LoadingProvider wrapper
 │   ├── main.tsx                 # React root
@@ -74,7 +72,7 @@ Beyond the original upstream portfolio:
 │   ├── context/
 │   │   └── LoadingProvider.tsx  # loader state (home only)
 │   ├── components/
-│   │   ├── Character/           # 3D character scene (raw three.js)
+│   │   ├── Character/           # 3D character scene (raw Three.js)
 │   │   ├── Service3D/           # R3F per-service 3D scenes
 │   │   │   ├── index.tsx        # Canvas + scene dispatcher
 │   │   │   ├── CandlesticksScene.tsx
@@ -138,9 +136,9 @@ If you fork this repo to build your own portfolio, here's a file-by-file map of 
 | [`src/components/WhatIDo.tsx`](src/components/WhatIDo.tsx) | Two skill cards (titles, descriptions, tag lists) |
 | [`src/components/Career.tsx`](src/components/Career.tsx) | Career timeline entries |
 | [`src/components/Work.tsx`](src/components/Work.tsx) | `projects` array — title, category, tools, image path, link |
-| [`src/components/Contact.tsx`](src/components/Contact.tsx) | "Work With Me" copy + the credit line (`Designed and Developed by ...`) |
-| [`src/components/SocialIcons.tsx`](src/components/SocialIcons.tsx) | Social URLs (currently `href="#"` placeholders) |
-| [`src/components/Navbar.tsx`](src/components/Navbar.tsx) | Logo initials (`AP` → yours) + `navbar-connect` link text |
+| [`src/components/Contact.tsx`](src/components/Contact.tsx) | "Work With Me" copy + the credit line |
+| [`src/components/SocialIcons.tsx`](src/components/SocialIcons.tsx) | Social URLs and the icon set (currently GitHub / Telegram / WhatsApp / Instagram) |
+| [`src/components/Navbar.tsx`](src/components/Navbar.tsx) | Logo initials + `navbar-connect` link text |
 | [`src/components/Loading.tsx`](src/components/Loading.tsx) | `BOOT_LINES` array — the status messages that print during boot |
 | [`public/images/`](public/images/) | Replace project screenshots referenced in `Work.tsx` |
 
@@ -207,15 +205,13 @@ That's it. No new routes to define — `/services/:slug` is a single dynamic rou
 
 ## The 3D character — important if you fork
 
-The 3D character model in [`public/models/character.enc`](public/models/) is an **encrypted GLB** of the upstream author's likeness (Akash Malhotra), loaded and decrypted at runtime by [`src/components/Character/`](src/components/Character/).
+The 3D character model in `public/models/character.enc` is an **encrypted GLB** loaded and decrypted at runtime by [`src/components/Character/`](src/components/Character/). It depicts a specific person and ships as-is from the original boilerplate.
 
-**If you fork this repo, you should NOT ship that character as your own.** Even though the code is MIT-licensed, the character is someone else's avatar. Options:
+**If you fork this repo, replace or remove the character — don't ship someone else's likeness as your own work.** Options:
 
 1. **Replace with your own GLB** — Provide an unencrypted `.glb` and update [`src/components/Character/utils/character.ts`](src/components/Character/utils/character.ts) to load it via `GLTFLoader` directly (skip the decryption step).
 2. **Remove the character section** — Strip `<CharacterModel />` from [`src/App.tsx`](src/App.tsx), and the related scene logic in MainContainer / Landing. Replace with something simpler (a 3D logo, abstract geometry, or no 3D at all).
 3. **Use one of the service-page 3D scenes as the hero** — They're built with `@react-three/fiber` primitives in [`src/components/Service3D/`](src/components/Service3D/) and need no external assets.
-
-Same goes for [`public/Akash_Malhotra.pdf`](public/) — that's the upstream author's resume. Delete it (the resume button has already been removed from `SocialIcons.tsx` in this fork, but the file lingers).
 
 The service-page 3D scenes ([`src/components/Service3D/`](src/components/Service3D/)) use only primitives (`<boxGeometry>`, `<sphereGeometry>`, etc.) and drei helpers — no external assets — so they're fully reusable.
 
@@ -274,16 +270,13 @@ The character scene is the heaviest asset. Two levers: reduce `renderer.setPixel
 **Type errors after editing `servicesData.ts`**
 The `ServiceKey` and `ThreeKind` union types at the top of the file are enforced. Add new slugs / scene kinds there before referencing them.
 
-**GSAP license**
+**GSAP plugins**
 This project uses the standard `gsap` package — `SplitText` and `ScrollSmoother` are now in the free core. If you're migrating from older code, remove any `gsap-trial` references and reinstall.
 
 ---
 
-## License & credits
+## License
 
 MIT — see [LICENSE](LICENSE).
-
-**Original boilerplate:** [akashrmalhotra/3d-portfolio](https://github.com/akashrmalhotra/3d-portfolio) by Akash Malhotra.
-**This fork:** [skylordblink/akcious-portfolio](https://github.com/skylordblink/akcious-portfolio).
 
 If you ship a portfolio based on this code, a link back is appreciated but not required.

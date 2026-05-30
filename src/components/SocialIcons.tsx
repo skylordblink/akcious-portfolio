@@ -1,8 +1,8 @@
 import {
   FaGithub,
   FaInstagram,
-  FaLinkedinIn,
-  FaYoutube,
+  FaTelegram,
+  FaWhatsapp,
 } from "react-icons/fa6";
 import "./styles/SocialIcons.css";
 import { useEffect } from "react";
@@ -60,22 +60,42 @@ const SocialIcons = () => {
     <div className="icons-section">
       <div className="social-icons" data-cursor="icons" id="social">
         <span>
-          <a href="#" aria-label="GitHub (coming soon)">
+          <a
+            href="https://github.com/skylordblink/akcious-portfolio/"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="GitHub"
+          >
             <FaGithub />
           </a>
         </span>
         <span>
-          <a href="#" aria-label="LinkedIn (coming soon)">
-            <FaLinkedinIn />
+          <a
+            href="https://t.me/brave-voice"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Telegram"
+          >
+            <FaTelegram />
           </a>
         </span>
         <span>
-          <a href="#" aria-label="YouTube (coming soon)">
-            <FaYoutube />
+          <a
+            href="https://wa.me/447463638975"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="WhatsApp"
+          >
+            <FaWhatsapp />
           </a>
         </span>
         <span>
-          <a href="#" aria-label="Instagram (coming soon)">
+          <a
+            href="https://instagram.com/alph__y_"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Instagram"
+          >
             <FaInstagram />
           </a>
         </span>
