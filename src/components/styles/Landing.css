@@ -111,9 +111,13 @@
   position: absolute;
   max-width: 1920px;
   max-height: 1080px;
-  transform: translateX(-50%);
-  width: 100%;
-  left: 50%;
+  /* Center horizontally via margin auto instead of transform — this leaves
+     the `transform` property free for GSAP to own without fighting the
+     centering. */
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
   z-index: 0;
   bottom: 50px;
   pointer-events: inherit;
