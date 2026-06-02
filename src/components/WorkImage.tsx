@@ -9,6 +9,8 @@ interface Props {
   link?: string;
 }
 
+const FALLBACK_IMAGE = "/images/placeholder.webp";
+
 const isClickable = (link?: string) =>
   !!link && link !== "#" && link.trim() !== "";
 
@@ -17,6 +19,7 @@ const isInternal = (link: string) => link.startsWith("/");
 const WorkImage = (props: Props) => {
   const [isVideo, setIsVideo] = useState(false);
   const [video, setVideo] = useState("");
+  const [imgSrc, setImgSrc] = useState(props.image);
 
   const handleMouseEnter = async () => {
     if (props.video) {
@@ -30,6 +33,12 @@ const WorkImage = (props: Props) => {
 
   const handleMouseLeave = () => setIsVideo(false);
 
+  const handleImgError = () => {
+    if (imgSrc !== FALLBACK_IMAGE) {
+      setImgSrc(FALLBACK_IMAGE);
+    }
+  };
+
   const innerContent = (
     <>
       {isClickable(props.link) && (
@@ -37,7 +46,7 @@ const WorkImage = (props: Props) => {
           <MdArrowOutward />
         </div>
       )}
-      <img src={props.image} alt={props.alt} />
+      <img src={imgSrc} alt={props.alt} onError={handleImgError} />
       {isVideo && <video src={video} autoPlay muted playsInline loop></video>}
     </>
   );

@@ -1,4 +1,5 @@
 import { SplitText } from "gsap/SplitText";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import gsap from "gsap";
 import { smoother } from "../Navbar";
 
@@ -6,6 +7,15 @@ export function initialFX() {
   document.body.style.overflowY = "auto";
   smoother.paused(false);
   document.getElementsByTagName("main")[0].classList.add("main-active");
+
+  // Recalculate ScrollTrigger positions now that body overflow has flipped to
+  // auto and the smoother is live — otherwise tl1/tl2/tl3 keep the start/end
+  // pixel offsets they captured while the page was non-scrollable, and the
+  // character/camera animations fire at the wrong scroll points on first visit.
+  requestAnimationFrame(() => {
+    ScrollTrigger.refresh(true);
+  });
+
   gsap.to("body", {
     backgroundColor: "#0a0e17",
     duration: 0.5,

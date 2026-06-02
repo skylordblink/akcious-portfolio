@@ -60,6 +60,12 @@
   box-sizing: border-box;
 }
 
+.case-hero-textonly {
+  grid-template-columns: 1fr;
+  max-width: 900px;
+  padding: 140px 5% 60px;
+}
+
 .case-hero-inner {
   max-width: 600px;
 }

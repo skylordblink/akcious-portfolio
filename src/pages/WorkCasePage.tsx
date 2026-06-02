@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import {
   WORK_CASE_BY_SLUG,
@@ -8,6 +8,26 @@ import {
 import Contact from "../components/Contact";
 import SocialIcons from "../components/SocialIcons";
 import "./styles/WorkCasePage.css";
+
+type ImageBlock = Extract<WorkCaseBlock, { kind: "image" }>;
+
+const CaseFigure = ({ block }: { block: ImageBlock }) => {
+  const [errored, setErrored] = useState(false);
+  if (errored) return null;
+  return (
+    <figure className="case-figure">
+      <img
+        src={block.src}
+        alt={block.alt}
+        loading="lazy"
+        onError={() => setErrored(true)}
+      />
+      {block.caption && (
+        <figcaption className="case-figcaption">{block.caption}</figcaption>
+      )}
+    </figure>
+  );
+};
 
 const renderBlock = (block: WorkCaseBlock, i: number) => {
   if (block.kind === "paragraph") {
@@ -29,23 +49,18 @@ const renderBlock = (block: WorkCaseBlock, i: number) => {
       </ul>
     );
   }
-  return (
-    <figure className="case-figure" key={i}>
-      <img src={block.src} alt={block.alt} loading="lazy" />
-      {block.caption && (
-        <figcaption className="case-figcaption">{block.caption}</figcaption>
-      )}
-    </figure>
-  );
+  return <CaseFigure block={block} key={i} />;
 };
 
 const WorkCasePage = () => {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
   const study = slug ? WORK_CASE_BY_SLUG[slug as WorkCaseSlug] : undefined;
+  const [heroImageErrored, setHeroImageErrored] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    setHeroImageErrored(false);
   }, [slug]);
 
   if (!study) {
@@ -60,6 +75,8 @@ const WorkCasePage = () => {
       </div>
     );
   }
+
+  const showHeroImage = !!study.coverImage && !heroImageErrored;
 
   return (
     <div className="case-page">
@@ -78,7 +95,9 @@ const WorkCasePage = () => {
 
       <SocialIcons />
 
-      <section className="case-hero">
+      <section
+        className={`case-hero ${showHeroImage ? "" : "case-hero-textonly"}`}
+      >
         <div className="case-hero-inner">
           <span className="case-eyebrow">Case study</span>
           <h1 className="case-title">{study.title}</h1>
@@ -95,13 +114,16 @@ const WorkCasePage = () => {
           </ul>
         </div>
 
-        <div className="case-hero-image">
-          <img
-            src={study.coverImage}
-            alt={`${study.title} cover image`}
-            loading="eager"
-          />
-        </div>
+        {showHeroImage && (
+          <div className="case-hero-image">
+            <img
+              src={study.coverImage}
+              alt={`${study.title} cover image`}
+              loading="eager"
+              onError={() => setHeroImageErrored(true)}
+            />
+          </div>
+        )}
       </section>
 
       <section className="case-body section-container">
