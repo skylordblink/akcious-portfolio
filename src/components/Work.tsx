@@ -5,6 +5,13 @@ import { MdArrowBack, MdArrowForward } from "react-icons/md";
 
 const projects = [
   {
+    title: "Optionscope",
+    category: "NSE Options Analysis — Desktop + Mobile",
+    tools: "Electron, Puppeteer, Claude API, Cloudflare Tunnel, PWA",
+    image: "/images/optionscope-control-room.png",
+    link: "/work/optionscope",
+  },
+  {
     title: "Trading Bot Suite",
     category: "Crypto & Forex Automation",
     tools: "Exchange APIs, Signal Engines, Telegram Alerts, Risk Management",

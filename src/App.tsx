@@ -6,6 +6,7 @@ import { LoadingProvider } from "./context/LoadingProvider";
 const CharacterModel = lazy(() => import("./components/Character"));
 const MainContainer = lazy(() => import("./components/MainContainer"));
 const ServicePage = lazy(() => import("./pages/ServicePage"));
+const WorkCasePage = lazy(() => import("./pages/WorkCasePage"));
 
 const HomeRoute = () => (
   <LoadingProvider>
@@ -29,6 +30,14 @@ const App = () => {
           element={
             <Suspense>
               <ServicePage />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/work/:slug"
+          element={
+            <Suspense>
+              <WorkCasePage />
             </Suspense>
           }
         />

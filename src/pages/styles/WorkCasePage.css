@@ -1,0 +1,334 @@
+.case-page {
+  background-color: #0a0e17;
+  color: #e2e8f0;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+.case-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: var(--cWidth);
+  max-width: var(--cMaxWidth);
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 0;
+  z-index: 100;
+  box-sizing: border-box;
+}
+
+.case-logo {
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.case-back-link {
+  background: none;
+  border: 1px solid rgba(94, 234, 212, 0.3);
+  color: #5eead4;
+  font-family: inherit;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  padding: 8px 16px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.25s ease-out;
+  text-transform: uppercase;
+}
+
+.case-back-link:hover {
+  background: rgba(94, 234, 212, 0.1);
+  border-color: rgba(94, 234, 212, 0.6);
+}
+
+.case-hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 140px 5% 80px;
+  box-sizing: border-box;
+}
+
+.case-hero-inner {
+  max-width: 600px;
+}
+
+.case-eyebrow {
+  display: inline-block;
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #5eead4;
+  border: 1px solid rgba(94, 234, 212, 0.3);
+  border-radius: 30px;
+  padding: 4px 14px;
+  margin-bottom: 24px;
+}
+
+.case-title {
+  font-size: clamp(42px, 6vw, 84px);
+  line-height: 1.02;
+  font-weight: 700;
+  margin: 0 0 16px;
+  letter-spacing: -1px;
+  color: #ffffff;
+}
+
+.case-subtitle {
+  font-size: clamp(18px, 2vw, 26px);
+  line-height: 1.35;
+  font-weight: 500;
+  color: #5eead4;
+  margin: 0 0 24px;
+  letter-spacing: -0.2px;
+}
+
+.case-tagline {
+  font-size: clamp(15px, 1.4vw, 18px);
+  line-height: 1.65;
+  font-weight: 300;
+  color: #cbd5e1;
+  margin: 0 0 36px;
+  max-width: 540px;
+}
+
+.case-meta {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 28px;
+  max-width: 520px;
+}
+
+.case-meta li {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.case-meta-label {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(203, 213, 225, 0.55);
+}
+
+.case-meta-value {
+  font-size: 14.5px;
+  color: #e2e8f0;
+  font-weight: 400;
+}
+
+.case-hero-image {
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  background: radial-gradient(
+    circle at 30% 20%,
+    rgba(94, 234, 212, 0.08) 0%,
+    transparent 70%
+  );
+  padding: 12px;
+  box-shadow: 0 30px 70px -20px rgba(0, 0, 0, 0.55);
+  border: 1px solid rgba(94, 234, 212, 0.15);
+}
+
+.case-hero-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.case-body {
+  padding: 40px 0 120px;
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+.case-section {
+  margin-bottom: 88px;
+}
+
+.case-section-eyebrow {
+  display: inline-block;
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #5eead4;
+  margin-bottom: 14px;
+}
+
+.case-section-heading {
+  font-size: clamp(26px, 3vw, 40px);
+  line-height: 1.15;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0 0 30px;
+  letter-spacing: -0.4px;
+  max-width: 760px;
+}
+
+.case-section-content {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.case-paragraph {
+  font-size: 17px;
+  line-height: 1.7;
+  color: #cbd5e1;
+  font-weight: 300;
+  margin: 0;
+  max-width: 760px;
+}
+
+.case-bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+
+.case-bullets li {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  font-size: 16px;
+  line-height: 1.55;
+  color: #e2e8f0;
+  font-weight: 300;
+}
+
+.case-bullet-glyph {
+  color: #5eead4;
+  font-family: ui-monospace, "Cascadia Code", "JetBrains Mono", Consolas,
+    monospace;
+  flex-shrink: 0;
+  font-weight: 500;
+}
+
+.case-figure {
+  margin: 12px 0 8px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.case-figure img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+  border: 1px solid rgba(94, 234, 212, 0.15);
+  background: rgba(94, 234, 212, 0.03);
+}
+
+.case-figcaption {
+  font-size: 13px;
+  color: rgba(203, 213, 225, 0.65);
+  font-style: italic;
+  text-align: center;
+}
+
+.case-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.case-cta-block {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 60px;
+}
+
+.case-cta {
+  display: inline-block;
+  margin-top: 16px;
+  padding: 14px 28px;
+  background: #5eead4;
+  color: #0a0e17;
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 30px;
+  transition: all 0.25s ease-out;
+}
+
+.case-cta:hover {
+  background: #2dd4bf;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px -8px rgba(94, 234, 212, 0.4);
+}
+
+.case-not-found {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  gap: 16px;
+}
+
+.case-not-found h2 {
+  color: #ffffff;
+  font-size: 32px;
+}
+
+.case-back {
+  color: #5eead4;
+  text-decoration: none;
+}
+
+@media (max-width: 900px) {
+  .case-hero {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    padding: 110px 24px 50px;
+  }
+  .case-meta {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding-top: 22px;
+  }
+  .case-body {
+    padding: 24px 24px 80px;
+  }
+  .case-section {
+    margin-bottom: 64px;
+  }
+  .case-paragraph {
+    font-size: 16px;
+  }
+  .case-bullets li {
+    font-size: 15px;
+  }
+  .case-section-heading {
+    margin-bottom: 22px;
+  }
+  .case-header {
+    padding: 16px 24px;
+    width: 100%;
+  }
+}
