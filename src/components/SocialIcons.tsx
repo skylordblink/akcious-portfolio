@@ -71,7 +71,7 @@ const SocialIcons = () => {
         </span>
         <span>
           <a
-            href="https://t.me/brave-voice"
+            href="https://t.me/@brave-voice"
             target="_blank"
             rel="noreferrer"
             aria-label="Telegram"
@@ -81,7 +81,7 @@ const SocialIcons = () => {
         </span>
         <span>
           <a
-            href="https://wa.me/447463638975"
+            href="https://wa.me/+447463638975"
             target="_blank"
             rel="noreferrer"
             aria-label="WhatsApp"
@@ -91,7 +91,7 @@ const SocialIcons = () => {
         </span>
         <span>
           <a
-            href="https://instagram.com/alph__y_"
+            href="https://instagram.com/@alph__y_"
             target="_blank"
             rel="noreferrer"
             aria-label="Instagram"
