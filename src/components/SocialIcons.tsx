@@ -71,7 +71,7 @@ const SocialIcons = () => {
         </span>
         <span>
           <a
-            href="https://t.me/@brave-voice"
+            href="https://t.me/@bravevoice"
             target="_blank"
             rel="noreferrer"
             aria-label="Telegram"
